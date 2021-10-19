@@ -21,6 +21,8 @@ public class CrudCargoService {
             System.out.println("0 - Sair");
             System.out.println("1 - Salvar");
             System.out.println("2 - Atualizar");
+            System.out.println("3 - Visualizar");
+            System.out.println("4 - Deletar");
 
             int action = scanner.nextInt();
             switch (action){
@@ -29,6 +31,12 @@ public class CrudCargoService {
                     break;
                 case 2:
                     atualizar(scanner);
+                    break;
+                case 3:
+                    visulaizar();
+                    break;
+                case 4:
+                    apagar(scanner);
                     break;
                 default:
                     system = false;
@@ -56,5 +64,17 @@ public class CrudCargoService {
         cargo.setDescription(description);
         cargoRepository.save(cargo);
         System.out.println("Registro atualizado com sucesso!");
+    }
+
+    private void visulaizar() {
+        Iterable<Cargo> cargos = cargoRepository.findAll();
+        cargos.forEach(cargo -> System.out.println(cargo));
+    }
+
+    private void apagar(Scanner scanner) {
+        System.out.println("Informe o id: ");
+        int id = scanner.nextInt();
+        cargoRepository.deleteById(id);
+        System.out.println("Registro apagado com sucesso!");
     }
 }
