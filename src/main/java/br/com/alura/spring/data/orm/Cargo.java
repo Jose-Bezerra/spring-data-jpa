@@ -1,6 +1,7 @@
 package br.com.alura.spring.data.orm;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cargos")
@@ -10,6 +11,8 @@ public class Cargo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String description;
+    @OneToMany(mappedBy = "cargo") //Mapeamento bidirecional
+    private List<Funcionario> funcionario;
 
     public Integer getId() {
         return id;
@@ -29,9 +32,6 @@ public class Cargo {
 
     @Override
     public String toString() {
-        return "Cargo{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                '}';
+        return "Cargo [id=" + id + ", descricao=" + description + "]";
     }
 }
